@@ -8,14 +8,7 @@ class BuscadorAzul(Buscador):
             super().__init__(outbound, origin, destination, intervalo_tempo, preco_maximo, navegador)
             self.link = "https://www.voeazul.com.br/br/pt/home/selecao-voo?c[0].ds=ORIGIN&c[0].std=OUTBOUND&c[0].as=DESTINATION&p[0].t=ADT&p[0].c=1&p[0].cp=false&f.dl=3&f.dr=3&cc=BRL&1741034666867"
             self.formatoDataLink = "%m/%d/%Y"
-
-
-    def aceitarCookies(self):
-        idCookie = "onetrust-accept-btn-handler"
-        try:
-            self.navegador.find_element(By.ID, idCookie).click()
-        except:
-            print("AZUL - Não foi possível clicar no botão de aceitar os Cookies")
+            self.idCookie = "onetrust-accept-btn-handlerA"
 
 
     def getPreco(self, voo):

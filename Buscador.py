@@ -45,9 +45,12 @@ class Buscador(ABC):
     # def pecorrerVoos(self):
     #     pass
         
-    @abstractmethod
     def aceitarCookies(self):
-        pass
+        try:
+            self.navegador.find_element(By.ID, self.idCookie).click()
+        except:
+            print(f"{self.__class__.__name__} - Erro ao aceitar os Cookies")
+
 
     def avancarProxDataDeBusca(self):
         self.proxDataDeBusca += timedelta(days=1)

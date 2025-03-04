@@ -6,14 +6,7 @@ class BuscadorGol(Buscador):
             super().__init__(outbound, origin, destination, intervalo_tempo, preco_maximo, navegador)
             self.link = "https://b2c.voegol.com.br/compra/busca-parceiros?pv=br&tipo=DF&de=LDB&para=BEL&ida=23-04-2025&ADT=1&CHD=0&INF=0&voebiz=0"
             self.formatoDataLink = "%d-%m-%Y"
-
-
-    def aceitarCookies(self):
-        idCookie = "onetrust-accept-btn-handler"
-        try:
-            self.navegador.find_element(By.ID, idCookie).click()
-        except:
-            print("GOL - Não foi possível clicar no botão de aceitar os Cookies")
+            self.idCookie = "onetrust-accept-btn-handlerA"
 
 
     def getPreco(self, voo):
