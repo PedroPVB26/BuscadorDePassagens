@@ -1,6 +1,6 @@
 # https://medium.com/@guilhermerdcarvalho/paradigma-orientado-ao-objeto-poo-em-python-a107d35bee3f
 
-# Finalizar a função de pegar a lista de voos da Azul
+# Verificar se é viável fazer a função atualizarLink na classe Buscador
 
 from selenium import webdriver
 from buscadorLatam import BuscadorLatam
@@ -11,11 +11,11 @@ import time
 navegador = webdriver.Chrome()
 navegador.implicitly_wait(10)
 
-# buscadorLatam = BuscadorLatam("20-03-2025", "LDB", "BEL", 4, 1500, navegador)
-# buscadorLatam.iniciarBusca()
+buscadorLatam = BuscadorLatam("20-03-2025", "LDB", "BEL", 4, 1500, navegador)
+buscadorLatam.iniciarBusca()
 
-# buscadorGol = BuscadorGol("20-03-2025", "LDB", "BEL", 4, 1500, navegador)
-# buscadorGol.iniciarBusca()
+buscadorGol = BuscadorGol("20-03-2025", "LDB", "BEL", 4, 1500, navegador)
+buscadorGol.iniciarBusca()
 
 buscadorAzul = BuscadorAzul("22-03-2025", "LDB", "BEL", 4, 1500, navegador)
 buscadorAzul.iniciarBusca()

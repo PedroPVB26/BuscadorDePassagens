@@ -7,19 +7,7 @@ class BuscadorAzul(Buscador):
     def __init__(self, outbound, origin, destination, intervalo_tempo, preco_maximo, navegador):
             super().__init__(outbound, origin, destination, intervalo_tempo, preco_maximo, navegador)
             self.link = "https://www.voeazul.com.br/br/pt/home/selecao-voo?c[0].ds=ORIGIN&c[0].std=OUTBOUND&c[0].as=DESTINATION&p[0].t=ADT&p[0].c=1&p[0].cp=false&f.dl=3&f.dr=3&cc=BRL&1741034666867"
-
-    def atualizarLink(self):
-        dataAtual = self.dataDeBusca
-        self.avancarDataDeBusca()
-            
-        # Se for a primeira busca, ou seja, o link ainda não foi atualizado
-        if "OUTBOUND" in self.link:
-            dataAtual = dataAtual.strftime("%m/%d/%Y")
-            self.link = self.link.replace("OUTBOUND", dataAtual)
-            self.link = self.link.replace("ORIGIN", self.origin)
-            self.link = self.link.replace("DESTINATION", self.destination)
-        else:
-            self.link = self.link.replace(dataAtual.strftime("%m/%d/%Y"), self.dataDeBusca.strftime("%m/%d/%Y"))
+            self.formatoDataLink = "%m/%d/%Y"
 
 
     def aceitarCookies(self):
@@ -60,7 +48,7 @@ class BuscadorAzul(Buscador):
         classeVoos = "flight-card" #-> Esta classe pega ate os voos esgotados. Avaliar posteriormente o que fazer (informar que os há voos esgotados?)
         # classeVoos = "css-1txam" -> Não pega o primeiro voo
 
-        # Antes de Pegar a lista efetivamente, tem que ficar apertando no botão "Ver mais voos", que fica no final da página, até que ele desapareça 
+        # Antes de Pegar a lista efetivamente, tem que ficar apertando no botão "Ver mais voos", que fica no final da página, até que ele desapareça e que todos os voos estejam sendo exibidos
         self.pressionarBtnVerMaisVoos()
             
         try:

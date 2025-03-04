@@ -5,20 +5,8 @@ class BuscadorGol(Buscador):
     def __init__(self, outbound, origin, destination, intervalo_tempo, preco_maximo, navegador):
             super().__init__(outbound, origin, destination, intervalo_tempo, preco_maximo, navegador)
             self.link = "https://b2c.voegol.com.br/compra/busca-parceiros?pv=br&tipo=DF&de=LDB&para=BEL&ida=23-04-2025&ADT=1&CHD=0&INF=0&voebiz=0"
+            self.formatoDataLink = "%d-%m-%Y"
 
-    def atualizarLink(self):
-        dataAtual = self.dataDeBusca
-        self.avancarDataDeBusca()
-            
-        # Se for a primeira busca, ou seja, o link ainda não foi atualizado
-        if "OUTBOUND" in self.link:
-            dataAtual = dataAtual.strftime("%d-%m-%Y")
-            self.link = self.link.replace("OUTBOUND", dataAtual)
-            self.link = self.link.replace("ORIGIN", self.origin)
-            self.link = self.link.replace("DESTINATION", self.destination)
-        else:
-            self.link = self.link.replace(dataAtual.strftime("%d-%m-%Y"), self.dataDeBusca.strftime("%d-%m-%Y"))
-          
 
     def aceitarCookies(self):
         idCookie = "onetrust-accept-btn-handler"

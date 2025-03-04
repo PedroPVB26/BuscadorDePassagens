@@ -7,20 +7,7 @@ class BuscadorLatam(Buscador):
     def __init__(self, outbound, origin, destination, intervalo_tempo, preco_maximo, navegador):
         super().__init__(outbound, origin, destination, intervalo_tempo, preco_maximo, navegador)
         self.link = "https://www.latamairlines.com/br/pt/oferta-voos/?origin=ORIGIN&outbound=OUTBOUNDT12%3A00%3A00.000Z&destination=DESTINATION&inbound=null&adt=1&chd=0&inf=0&trip=OW&cabin=Economy&redemption=false&sort=RECOMMENDED"
-
-    
-    def atualizarLink(self):
-        dataAtual = self.dataDeBusca
-        self.avancarDataDeBusca()
-            
-        # Se for a primeira busca, ou seja, o link ainda não foi atualizado
-        if "OUTBOUND" in self.link:
-            dataAtual = dataAtual.strftime("%Y-%m-%d")
-            self.link = self.link.replace("OUTBOUND", dataAtual)
-            self.link = self.link.replace("ORIGIN", self.origin)
-            self.link = self.link.replace("DESTINATION", self.destination)
-        else:
-            self.link = self.link.replace(dataAtual.strftime("%Y-%m-%d"), self.dataDeBusca.strftime("%Y-%m-%d"))
+        self.formatoDataLink = "%Y-%m-%d"
 
 
     def aceitarCookies(self):
@@ -47,5 +34,9 @@ class BuscadorLatam(Buscador):
             return self.navegador.find_elements(By.CLASS_NAME, classeVoos)
         except:
             print("LATAM - Não foi possível pegar a lista dos voos")
+
+    def getHorarios(self, voo):
+        diaPartida = self.dataAtual
+        pass
 
 

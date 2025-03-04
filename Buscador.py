@@ -13,8 +13,8 @@ class Buscador(ABC):
         self.intervalo_tempo = intervalo_tempo
         self.preco_maximo = preco_maximo
         self.navegador = navegador
-        self.dataDeBusca = datetime.strptime(self.outbound, "%d-%m-%Y")
-
+        self.proxDataDeBusca = datetime.strptime(self.outbound, "%d-%m-%Y")
+        self.dataAtual = self.proxDataDeBusca
     
     # # Serve para pegar o preço já formatado
     # @abstractmethod
@@ -30,8 +30,8 @@ class Buscador(ABC):
 
     # # Deve retornar, por meio de tupla, o horário de partida e chegada
     # @abstractmethod
-    # def getHorarios(self):
-    #     pass
+    def getHorarios(self):
+        pass
 
 
     # # Verifica se há conexões, retornando falso se não houver e, se houver, retornando o número de conxeções
@@ -49,12 +49,23 @@ class Buscador(ABC):
     def aceitarCookies(self):
         pass
 
-    def avancarDataDeBusca(self):
-        self.dataDeBusca += timedelta(days=1)
+    def avancarProxDataDeBusca(self):
+        self.proxDataDeBusca += timedelta(days=1)
 
-    @abstractmethod
+
     def atualizarLink(self):
-        pass
+        self.dataAtual = self.proxDataDeBusca
+        self.avancarProxDataDeBusca()
+            
+        # Se for a primeira busca, ou seja, o link ainda não foi atualizado
+        if "OUTBOUND" in self.link:
+            self.dataAtual = self.dataAtual.strftime(self.formatoDataLink)
+            self.link = self.link.replace("OUTBOUND", self.dataAtual)
+            self.link = self.link.replace("ORIGIN", self.origin)
+            self.link = self.link.replace("DESTINATION", self.destination)
+        else:
+            self.link = self.link.replace(self.dataAtual.strftime(self.formatoDataLink), self.proxDataDeBusca.strftime(self.formatoDataLink))
+
 
     # def atualizarLink(self, link):
     #     dataAtual = self.dataDeBusca
@@ -88,10 +99,10 @@ class Buscador(ABC):
     #             dataAtual = dataAtual.strftime("%d/%m/%Y")
 
     #         self.link = link.replace(dataAtual, self.dataDeBusca)
-        
 
-    def verificarPreco(self):
-        if self.preco_maximo <= self.getPreco():
+
+    def verificarPreco(self, preco):
+        if self.preco_maximo <= preco:
             return True
         else:
             return False 
@@ -103,6 +114,7 @@ class Buscador(ABC):
             x+=1
 
         print(x)
+
 
     def iniciarBusca(self):
         # 1 Entrar no link
@@ -116,13 +128,18 @@ class Buscador(ABC):
         # 3 Pegar a lista de Voos
         listaVoos = self.getListaVoos()
         self.verificarTamanhoLista(listaVoos)
+        
         # 4 Percorrer os voos
         for voo in listaVoos:
             
         # 5 Pegar as informações dos voos
             # 5.1 Pegar Preco
             preco = self.getPreco(voo)
-            print(preco)
+
+            if self.verificarPreco(preco):
+                print(preco)
+            else:
+                print("Preço da passagem é superior ao desejado")
 
             # 5.2 Pegar Datas e Horários (Partida e Chegada)
 
