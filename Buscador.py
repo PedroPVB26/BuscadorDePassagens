@@ -16,6 +16,7 @@ class Buscador(ABC):
         self.proxDataDeBusca = datetime.strptime(self.outbound, "%d-%m-%Y")
         self.dataAtual = self.proxDataDeBusca
     
+    
     # # Serve para pegar o preço já formatado
     # @abstractmethod
     def getPreco(self):
@@ -52,7 +53,7 @@ class Buscador(ABC):
         try:
             self.navegador.find_element(By.ID, self.idCookie).click()
         except:
-            print(f"{self.__class__.__name__} - Erro ao aceitar os Cookies")
+            print(f"{self.__class__.__name__} - Erro ao aceitar os Cookies || Cookies já foram aceitos")
 
 
     def avancarProxDataDeBusca(self):
@@ -71,40 +72,6 @@ class Buscador(ABC):
             self.link = self.link.replace("DESTINATION", self.destination)
         else:
             self.link = self.link.replace(self.dataAtual.strftime(self.formatoDataLink), self.proxDataDeBusca.strftime(self.formatoDataLink))
-
-
-    # def atualizarLink(self, link):
-    #     dataAtual = self.dataDeBusca
-    #     self.avancarDataDeBusca()
-
-    #     # Caso seja a primeira vez, o link ainda não conterá as informações necessárias.
-    #     if "OUTBOUND" and "ORIGIN" in link:
-    #         if "latam" in link:
-    #             # Formtar a data para o formato da latam para trocar no link, e atualizar pela proxima data
-    #             self.outbound = dataAtual.strftime("%Y-%m-%d")
-            
-    #         elif "gol" in link:
-    #             self.outbound = dataAtual.strftime("%d-%m-%Y")
-            
-    #         elif "azul" in link:
-    #             self.outbound = dataAtual.strftime("%d/%m/%Y")
-        
-    #         self.link = link.replace("OUTBOUND", self.outbound)
-    #         self.link = self.link.replace("ORIGIN", self.origin)
-    #         self.link = self.link.replace("DESTINATION", self.destination)
-
-    #     else:
-    #         if "latam" in link:
-    #             # Formtar a data para o formato da latam para trocar no link, e atualizar pela proxima data
-    #             dataAtual = dataAtual.strftime("%Y-%m-%d")
-            
-    #         elif "gol" in link:
-    #             dataAtual = dataAtual.strftime("%d-%m-%Y")
-            
-    #         elif "azul" in link:
-    #             dataAtual = dataAtual.strftime("%d/%m/%Y")
-
-    #         self.link = link.replace(dataAtual, self.dataDeBusca)
 
 
     def verificarPreco(self, preco):
@@ -144,7 +111,7 @@ class Buscador(ABC):
 
 
             # 5.2 Pegar Datas e Horários (Partida e Chegada)
-
+            self.getHorarios(voo)
 
             # 5.3 Pegar Conexões
 

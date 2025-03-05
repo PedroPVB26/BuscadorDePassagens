@@ -1,6 +1,6 @@
-# Para a Latam, eu pecorro por meio dos botões, porém, os seus IDs podem mudar, mas pelo Link não. Então fazer uma busca igual a da Gol, por meio dos Links
 from Buscador import Buscador
 from selenium.webdriver.common.by import By
+from datetime import datetime, timedelta
 
 class BuscadorLatam(Buscador):
     def __init__(self, outbound, origin, destination, intervalo_tempo, preco_maximo, navegador):
@@ -29,7 +29,9 @@ class BuscadorLatam(Buscador):
 
 
     def getHorarios(self, voo):
-        diaPartida = self.dataAtual
-        pass
+        classeHorarios = "lcVysi"
+      
+        horarios = voo.find_elements(By.CLASS_NAME, classeHorarios)
 
-
+        dataPartida = datetime.strptime(self.dataAtual,"%Y-%m-%d").strftime("%d/%m/%Y")
+        dataChegada = datetime.strptime(self.dataAtual,"%Y-%m-%d")

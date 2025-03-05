@@ -12,7 +12,6 @@ class BuscadorAzul(Buscador):
 
 
     def getPreco(self, voo):
-        print("--- getPreco ---")
         classePreco = "current"
 
         try:
@@ -25,7 +24,6 @@ class BuscadorAzul(Buscador):
 
     # Exibir todos os voos
     def pressionarBtnVerMaisVoos(self):
-        print("--- pressionarBtnVerMaisVoos ---")
         idBotao = "load-more-button"
         btnVerMaisVoos = self.navegador.find_element(By.ID, idBotao)
 
@@ -43,12 +41,10 @@ class BuscadorAzul(Buscador):
     # Pegar somente os voos não esgotados
     # A verificação é feita pela existência do preço da passagem no voo
     def deletarVoosEsgotados(self, listaVoosOriginal):
-        print("--- deletarVoosEsgotados ---")
         classePreco = "current"
         novaListaVoos = []
 
         for voo in listaVoosOriginal:
-            print("--- verificandoVoo ---")
             try:
                 voo.find_element(By.CLASS_NAME, classePreco).text # Se tem preço, não tá esgotado
                 novaListaVoos.append(voo)
@@ -58,7 +54,6 @@ class BuscadorAzul(Buscador):
         
 
     def getListaVoos(self):
-        print("--- getListaVoos ---")
         classeVoos = "flight-card" #-> Esta classe pega ate os voos esgotados
 
         self.pressionarBtnVerMaisVoos()
