@@ -28,6 +28,22 @@ class BuscadorLatam(Buscador):
             print("LATAM - Não foi possível pegar a lista dos voos")
 
 
+    def formatarHorario(self, horario):
+        # Ajeitando "2:20" para "02:20"
+        if len(horario) < 5:
+            horario = f"0{horario}"
+
+        return horario
+    
+
+    def atualizarChegada(self, horario, dataChegada):
+        dataChegada += timedelta(int(horario[-1]))
+
+        horario = self.formatarHorario(horario[:-3])
+
+        return horario, dataChegada
+
+
     def getHorarios(self, voo):
         classeHorarios = "lcVysi"
       
@@ -35,3 +51,19 @@ class BuscadorLatam(Buscador):
 
         dataPartida = datetime.strptime(self.dataAtual,"%Y-%m-%d").strftime("%d/%m/%Y")
         dataChegada = datetime.strptime(self.dataAtual,"%Y-%m-%d")
+
+        horarioPartida = self.formatarHorario(horarios[0].text)
+        horarioChegada = horarios[1].text
+
+        # Avião chega no proximo dia    
+        if len(horarioChegada) > 5:
+            horarioChegada, dataChegada = self.atualizarChegada(horarioChegada, dataChegada)
+        else:
+            horarioChegada = self.formatarHorario(horarioChegada)
+            
+        dataChegada = dataChegada.strftime("%d/%m/%Y")
+
+        partida = f"{dataPartida} : {horarioPartida}"
+        chegada = f"{dataChegada} : {horarioChegada}"
+
+        return partida, chegada

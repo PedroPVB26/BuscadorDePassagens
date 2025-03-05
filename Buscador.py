@@ -99,12 +99,12 @@ class Buscador(ABC):
         
         # 4 Percorrer os voos
         for voo in listaVoos:
-            preco = self.getPreco(voo)
+            # preco = self.getPreco(voo)
 
-            if self.verificarPreco(preco):
-                print(preco)
-            else:
-                print("Preço da passagem é superior ao desejado")            
+            # if self.verificarPreco(preco):
+            #     print(preco)
+            # else:
+            #     print("Preço da passagem é superior ao desejado")            
             
         # 5 Pegar as informações dos voos
             # 5.1 Pegar Preco
