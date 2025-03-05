@@ -98,7 +98,7 @@ class Buscador(ABC):
         listaVoos = self.getListaVoos()
         
         # 4 Percorrer os voos
-        for voo in listaVoos:
+        for i, voo in enumerate(listaVoos):
             # preco = self.getPreco(voo)
 
             # if self.verificarPreco(preco):
@@ -111,7 +111,7 @@ class Buscador(ABC):
 
 
             # 5.2 Pegar Datas e Horários (Partida e Chegada)
-            self.getHorarios(voo)
+            self.getHorarios(voo, i)
 
             # 5.3 Pegar Conexões
 

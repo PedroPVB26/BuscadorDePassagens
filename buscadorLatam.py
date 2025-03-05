@@ -44,13 +44,13 @@ class BuscadorLatam(Buscador):
         return horario, dataChegada
 
 
-    def getHorarios(self, voo):
+    def getHorarios(self, voo, i=0):
         classeHorarios = "lcVysi"
       
         horarios = voo.find_elements(By.CLASS_NAME, classeHorarios)
 
-        dataPartida = datetime.strptime(self.dataAtual,"%Y-%m-%d").strftime("%d/%m/%Y")
-        dataChegada = datetime.strptime(self.dataAtual,"%Y-%m-%d")
+        dataPartida = datetime.strptime(self.dataAtual, self.formatoDataLink).strftime("%d/%m/%Y")
+        dataChegada = datetime.strptime(self.dataAtual,self.formatoDataLink)
 
         horarioPartida = self.formatarHorario(horarios[0].text)
         horarioChegada = horarios[1].text
