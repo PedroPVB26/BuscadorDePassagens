@@ -1,7 +1,8 @@
 from Buscador import Buscador
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 import time
+from datetime import datetime, timedelta
+
 
 class BuscadorAzul(Buscador):
     def __init__(self, outbound, origin, destination, intervalo_tempo, preco_maximo, navegador):
@@ -25,18 +26,22 @@ class BuscadorAzul(Buscador):
     # Exibir todos os voos
     def pressionarBtnVerMaisVoos(self):
         idBotao = "load-more-button"
-        btnVerMaisVoos = self.navegador.find_element(By.ID, idBotao)
 
-        while True:
-            if btnVerMaisVoos:
-                try:
-                    self.navegador.execute_script("arguments[0].scrollIntoView(true);", btnVerMaisVoos)
-                    time.sleep(1)
-                    btnVerMaisVoos.click()
-                except:
-                    break
-            else:
-                break        
+        try:
+            btnVerMaisVoos = self.navegador.find_element(By.ID, idBotao)
+
+            while True:
+                if btnVerMaisVoos:
+                    try:
+                        self.navegador.execute_script("arguments[0].scrollIntoView(true);", btnVerMaisVoos)
+                        time.sleep(1)
+                        btnVerMaisVoos.click()
+                    except:
+                        break
+                else:
+                    break        
+        except:
+            pass
 
     # Pegar somente os voos não esgotados
     # A verificação é feita pela existência do preço da passagem no voo
@@ -64,3 +69,34 @@ class BuscadorAzul(Buscador):
             return listaVoos
         except:
             print("AZUL - Não foi possível pegar a lista dos voos")
+
+
+    def atualizarChegada(self, dataPartida, horarioChegada):  # Pensar na lógica para quando o voo não necessariamente chegar no próximo dia, ou chegar no outro ano
+        if(len(horarioChegada) > 9):
+            dataPartida = datetime.strptime(dataPartida, "%d/%m/%Y")
+            dataPartida += timedelta(days=1)
+            dataPartida = dataPartida.strftime("%d/%m/%Y")
+            horarioChegada = horarioChegada[:5]
+        else:
+            horarioChegada = horarioChegada[:5]
+
+        return horarioChegada, dataPartida
+    
+
+    def getHorarios(self, voo, i=0):
+        classePartida = "departure"
+        classeChegada = "arrival"
+        # classeDatas = "iata-day"
+
+        dataPartida = datetime.strptime(self.dataAtual, self.formatoDataLink).strftime("%d/%m/%Y") 
+
+        horarioPartida = voo.find_element(By.CLASS_NAME, classePartida).text[:5]
+        horarioChegada = voo.find_element(By.CLASS_NAME, classeChegada).text
+
+        horarioChegada, dataChegada = self.atualizarChegada(dataPartida, horarioChegada)
+        
+        partida = f"{dataPartida} : {horarioPartida}"
+        chegada = f"{dataChegada} : {horarioChegada}"
+
+
+        return partida, chegada

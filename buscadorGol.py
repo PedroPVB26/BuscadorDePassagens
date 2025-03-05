@@ -30,7 +30,7 @@ class BuscadorGol(Buscador):
 
     def atualizarChegada(self, horaPartida, horaChegada, dataChegada):
         if int(horaChegada[:2]) < int(horaPartida[:2]):
-            dataChegada += timedelta(days=1)
+            dataChegada += timedelta(days=1) # Pensar na lógica para quando o voo não necessariamente chegar no próximo dia
 
         return dataChegada.strftime("%d/%m/%Y")
     
