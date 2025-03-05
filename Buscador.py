@@ -33,6 +33,9 @@ class Buscador(ABC):
     def getHorarios(self):
         pass
 
+    
+    def excluirVoosEsgotados(self):
+        pass
 
     # # Verifica se há conexões, retornando falso se não houver e, se houver, retornando o número de conxeções
     # @abstractmethod
@@ -105,18 +108,14 @@ class Buscador(ABC):
 
 
     def verificarPreco(self, preco):
-        if self.preco_maximo <= preco:
+        if preco <= self.preco_maximo:
             return True
         else:
             return False 
         
 
     def verificarTamanhoLista(self, lista):
-        x = 0
-        for elemento in lista:
-            x+=1
-
-        print(x)
+        print(len(lista))
 
 
     def iniciarBusca(self):
@@ -130,19 +129,19 @@ class Buscador(ABC):
 
         # 3 Pegar a lista de Voos
         listaVoos = self.getListaVoos()
-        self.verificarTamanhoLista(listaVoos)
         
         # 4 Percorrer os voos
         for voo in listaVoos:
-            
-        # 5 Pegar as informações dos voos
-            # 5.1 Pegar Preco
             preco = self.getPreco(voo)
 
             if self.verificarPreco(preco):
                 print(preco)
             else:
-                print("Preço da passagem é superior ao desejado")
+                print("Preço da passagem é superior ao desejado")            
+            
+        # 5 Pegar as informações dos voos
+            # 5.1 Pegar Preco
+
 
             # 5.2 Pegar Datas e Horários (Partida e Chegada)
 

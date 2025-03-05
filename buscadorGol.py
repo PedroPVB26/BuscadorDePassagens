@@ -3,10 +3,10 @@ from selenium.webdriver.common.by import By
 
 class BuscadorGol(Buscador):
     def __init__(self, outbound, origin, destination, intervalo_tempo, preco_maximo, navegador):
-            super().__init__(outbound, origin, destination, intervalo_tempo, preco_maximo, navegador)
-            self.link = "https://b2c.voegol.com.br/compra/busca-parceiros?pv=br&tipo=DF&de=LDB&para=BEL&ida=23-04-2025&ADT=1&CHD=0&INF=0&voebiz=0"
-            self.formatoDataLink = "%d-%m-%Y"
-            self.idCookie = "onetrust-accept-btn-handlerA"
+        super().__init__(outbound, origin, destination, intervalo_tempo, preco_maximo, navegador)
+        self.link = "https://b2c.voegol.com.br/compra/busca-parceiros?pv=br&tipo=DF&de=LDB&para=BEL&ida=23-04-2025&ADT=1&CHD=0&INF=0&voebiz=0"
+        self.formatoDataLink = "%d-%m-%Y"
+        self.idCookie = "onetrust-accept-btn-handler"
 
 
     def getPreco(self, voo):

@@ -7,7 +7,7 @@ class BuscadorLatam(Buscador):
         super().__init__(outbound, origin, destination, intervalo_tempo, preco_maximo, navegador)
         self.link = "https://www.latamairlines.com/br/pt/oferta-voos/?origin=ORIGIN&outbound=OUTBOUNDT12%3A00%3A00.000Z&destination=DESTINATION&inbound=null&adt=1&chd=0&inf=0&trip=OW&cabin=Economy&redemption=false&sort=RECOMMENDED"
         self.formatoDataLink = "%Y-%m-%d"
-        self.idCookie = "cookies-politics-buttonA"
+        self.idCookie = "cookies-politics-button"
 
 
     def getPreco(self, voo):
@@ -26,6 +26,7 @@ class BuscadorLatam(Buscador):
             return self.navegador.find_elements(By.CLASS_NAME, classeVoos)
         except:
             print("LATAM - Não foi possível pegar a lista dos voos")
+
 
     def getHorarios(self, voo):
         diaPartida = self.dataAtual

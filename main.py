@@ -6,18 +6,16 @@ from selenium import webdriver
 from buscadorLatam import BuscadorLatam
 from buscadorGol import BuscadorGol
 from buscadorAzul import BuscadorAzul
-import time
+
 
 navegador = webdriver.Chrome()
 navegador.implicitly_wait(10)
 
-buscadorLatam = BuscadorLatam("20-03-2025", "LDB", "BEL", 4, 1500, navegador)
-buscadorLatam.iniciarBusca()
+# buscadorLatam = BuscadorLatam("20-03-2025", "LDB", "BEL", 4, 1500, navegador)
+# buscadorLatam.iniciarBusca()
 
-buscadorGol = BuscadorGol("20-03-2025", "LDB", "BEL", 4, 1500, navegador)
-buscadorGol.iniciarBusca()
+# buscadorGol = BuscadorGol("20-03-2025", "LDB", "BEL", 4, 1500, navegador)
+# buscadorGol.iniciarBusca()
 
-buscadorAzul = BuscadorAzul("22-03-2025", "LDB", "BEL", 4, 1500, navegador)
+buscadorAzul = BuscadorAzul("05-03-2025", "LDB", "BEL", 4, 3000, navegador)
 buscadorAzul.iniciarBusca()
-
-time.sleep(30)
