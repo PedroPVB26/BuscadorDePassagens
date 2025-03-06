@@ -19,7 +19,7 @@ class Buscador(ABC):
     
     # # Serve para pegar o preço já formatado
     @abstractmethod
-    def getPreco(self):
+    def getPreco(self, voo):
         pass
 
 
@@ -31,7 +31,7 @@ class Buscador(ABC):
 
     # # Deve retornar, por meio de tupla, o horário de partida e chegada
     @abstractmethod
-    def getHorarios(self):
+    def getHorarios(self, voo, i):
         pass
 
     
@@ -40,7 +40,7 @@ class Buscador(ABC):
 
     # # Verifica se há conexões, retornando falso se não houver e, se houver, retornando o número de conxeções
     @abstractmethod
-    def getConexoes(self):
+    def getConexoes(self, voo, i):
         pass
 
 
@@ -108,7 +108,7 @@ class Buscador(ABC):
             
             # partida, chegada = self.getHorarios(voo, i)
 
-            conexao = self.getConexoes(voo)
+            conexao = self.getConexoes(voo, i)
             print(conexao)
         # 5 Pegar as informações dos voos
             # 5.1 Pegar Preco

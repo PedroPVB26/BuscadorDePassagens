@@ -68,8 +68,8 @@ class BuscadorLatam(Buscador):
 
         return partida, chegada
     
-    
-    def getConexoes(self, voo):
+
+    def getConexoes(self, voo, i=0):
         classeConexao = "kwVdvg"
 
         conexao = voo.find_elements(By.CLASS_NAME, classeConexao)

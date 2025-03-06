@@ -53,3 +53,12 @@ class BuscadorGol(Buscador):
         print(f"{partida} - {chegada}")
 
         return partida, chegada
+    
+    def getConexoes(self, voo, i):
+        idConexao = f"lbl_segment_{i + 1}_emission"
+
+        conexao = voo.find_element(By.ID, idConexao).text[:1]
+
+        if conexao == "D": conexao = "Direto"
+
+        return conexao
