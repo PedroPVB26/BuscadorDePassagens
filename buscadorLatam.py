@@ -12,16 +12,14 @@ class BuscadorLatam(Buscador):
 
     def getPreco(self, voo):
         classePreco = "koxMWe"
-        preco = voo.find_elements(By.CLASS_NAME, classePreco)[1].text[4:]
-        preco = preco.replace(".", "").replace(",",".")
-        print(preco)
-        return float(preco)        
-        # try:
-        #     preco = voo.find_elements(By.CLASS_NAME, classePreco)[1].text[4:]
-        #     preco = preco.replace(".", "").replace(",",".")
-        #     return float(preco)
-        # except:
-        #     print("LATAM - Não foi possível pegar o preço")
+
+        listaElementos = voo.find_elements(By.CLASS_NAME, classePreco)
+
+        for element  in listaElementos:
+            if element.text:
+                preco = float(element.text[4:].replace(".", "").replace(",","."))
+
+        return preco
 
 
     def getListaVoos(self):
