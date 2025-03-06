@@ -11,13 +11,13 @@ import time
 navegador = webdriver.Chrome()
 navegador.implicitly_wait(10)
 
-# buscadorLatam = BuscadorLatam("05-03-2025", "LDB", "BEL", 4, 5000, navegador)
-# buscadorLatam.iniciarBusca()
+buscadorLatam = BuscadorLatam("17-04-2025", "BEL", "MAO", 4, 5000, navegador)
+buscadorLatam.iniciarBusca()
 
 # buscadorGol = BuscadorGol("20-03-2025", "POA", "MAO", 4, 1500, navegador)
 # buscadorGol.iniciarBusca()
 
-buscadorAzul = BuscadorAzul("14-03-2025", "LDB", "BEL", 4, 3000, navegador)
-buscadorAzul.iniciarBusca()
+# buscadorAzul = BuscadorAzul("14-03-2025", "LDB", "BEL", 4, 3000, navegador)
+# buscadorAzul.iniciarBusca()
 
 time.sleep(30)

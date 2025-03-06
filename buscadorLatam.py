@@ -67,3 +67,18 @@ class BuscadorLatam(Buscador):
         chegada = f"{dataChegada} : {horarioChegada}"
 
         return partida, chegada
+    
+    
+    def getConexoes(self, voo):
+        classeConexao = "kwVdvg"
+
+        conexao = voo.find_elements(By.CLASS_NAME, classeConexao)
+
+        if len(conexao) > 1:
+            conexao = conexao[1].text[:1]
+        else:
+            conexao = conexao[0].text[:1]
+
+        if conexao == "D": conexao = "Direto"
+
+        return conexao
