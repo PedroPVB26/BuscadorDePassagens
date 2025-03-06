@@ -100,3 +100,15 @@ class BuscadorAzul(Buscador):
 
 
         return partida, chegada
+    
+    def getConexoes(self, voo, i=0):
+        classeConexao = "flight-leg-info"
+
+        conexao = voo.find_element(By.CLASS_NAME, classeConexao).text
+
+        if "D" in conexao: 
+            conexao = "Direto"
+        else:
+            conexao = conexao[:1]
+
+        return conexao
