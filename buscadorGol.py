@@ -50,8 +50,6 @@ class BuscadorGol(Buscador):
         partida = f"{dataPartida} : {horarioPartida}"
         chegada = f"{dataChegada} : {horarioChegada}"
 
-        print(f"{partida} - {chegada}")
-
         return partida, chegada
     
     def getConexoes(self, voo, i):

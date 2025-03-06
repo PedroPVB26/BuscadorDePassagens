@@ -98,7 +98,6 @@ class BuscadorAzul(Buscador):
         partida = f"{dataPartida} : {horarioPartida}"
         chegada = f"{dataChegada} : {horarioChegada}"
 
-
         return partida, chegada
     
     def getConexoes(self, voo, i=0):

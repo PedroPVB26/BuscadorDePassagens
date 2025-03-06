@@ -61,6 +61,7 @@ class Buscador(ABC):
 
 
     def atualizarLink(self):
+        dataAnterior = self.dataAtual  
         self.dataAtual = self.proxDataDeBusca
         self.avancarProxDataDeBusca()
             
@@ -71,9 +72,10 @@ class Buscador(ABC):
             self.link = self.link.replace("ORIGIN", self.origin)
             self.link = self.link.replace("DESTINATION", self.destination)
         else:
-            self.link = self.link.replace(self.dataAtual.strftime(self.formatoDataLink), self.proxDataDeBusca.strftime(self.formatoDataLink))
+            self.link = self.link.replace(dataAnterior, self.dataAtual.strftime(self.formatoDataLink))
+            self.dataAtual = self.dataAtual.strftime(self.formatoDataLink)            
 
-
+        
     def verificarPreco(self, preco):
         if preco <= self.preco_maximo:
             return True
@@ -86,38 +88,31 @@ class Buscador(ABC):
 
 
     def iniciarBusca(self):
-        # 1 Entrar no link
-        self.atualizarLink()
-        self.navegador.get(self.link)
+        for it in range(self.intervalo_tempo):
+            # 1 Entrar no link
+            self.atualizarLink()
+            self.navegador.get(self.link)
 
-        # 2 Aceitar Cookies
-        # Não esquecer de esperar a página carregar
-        self.aceitarCookies()
+            # 2 Aceitar Cookies
+            # Não esquecer de esperar a página carregar
+            self.aceitarCookies()
 
-        # 3 Pegar a lista de Voos
-        listaVoos = self.getListaVoos()
-        
-        # 4 Percorrer os voos
-        for i, voo in enumerate(listaVoos):
-            # preco = self.getPreco(voo)
-
-            # if self.verificarPreco(preco):
-            #     print(preco)
-            # else:
-            #     print("Preço da passagem é superior ao desejado")            
+            # 3 Pegar a lista de Voos
+            listaVoos = self.getListaVoos()
             
-            # partida, chegada = self.getHorarios(voo, i)
+            # 4 Percorrer os voos
+            for i, voo in enumerate(listaVoos):
+                preco = self.getPreco(voo)
 
-            conexao = self.getConexoes(voo, i)
-            print(conexao)
-        # 5 Pegar as informações dos voos
-            # 5.1 Pegar Preco
+            # 5 Pegando as Informações dos voos
+                if self.verificarPreco(preco):
+                    partida, chegada = self.getHorarios(voo, i)
+                    conexao = self.getConexoes(voo, i)
 
-            # 5.2 Pegar Datas e Horários (Partida e Chegada)
+                    print(f"VOO: {preco} --> ({partida} --> {chegada} ) --> {conexao}")
 
-            # 5.3 Pegar Conexões
 
-        # 5.4 Salvar as informações em uma tabela
+            # 5.4 Salvar as informações em uma tabela
 
-        # 5.5 Ir para a próxima data de voos e recomeçar a partir do item 3
+            # 5.5 Ir para a próxima data de voos e recomeçar a partir do item 3
         

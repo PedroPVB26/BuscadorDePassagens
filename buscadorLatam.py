@@ -12,12 +12,16 @@ class BuscadorLatam(Buscador):
 
     def getPreco(self, voo):
         classePreco = "koxMWe"
-        try:
-            preco = voo.find_elements(By.CLASS_NAME, classePreco)[1].text[4:]
-            preco = preco.replace(".", "").replace(",",".")
-            return float(preco)
-        except:
-            print("LATAM - Não foi possível pegar o preço")
+        preco = voo.find_elements(By.CLASS_NAME, classePreco)[1].text[4:]
+        preco = preco.replace(".", "").replace(",",".")
+        print(preco)
+        return float(preco)        
+        # try:
+        #     preco = voo.find_elements(By.CLASS_NAME, classePreco)[1].text[4:]
+        #     preco = preco.replace(".", "").replace(",",".")
+        #     return float(preco)
+        # except:
+        #     print("LATAM - Não foi possível pegar o preço")
 
 
     def getListaVoos(self):
@@ -50,7 +54,7 @@ class BuscadorLatam(Buscador):
         horarios = voo.find_elements(By.CLASS_NAME, classeHorarios)
 
         dataPartida = datetime.strptime(self.dataAtual, self.formatoDataLink).strftime("%d/%m/%Y")
-        dataChegada = datetime.strptime(self.dataAtual,self.formatoDataLink)
+        dataChegada = datetime.strptime(self.dataAtual, self.formatoDataLink)
 
         horarioPartida = self.formatarHorario(horarios[0].text)
         horarioChegada = horarios[1].text
