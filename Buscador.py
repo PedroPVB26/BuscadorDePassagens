@@ -116,8 +116,6 @@ class Buscador(ABC):
                     partida, chegada = self.getHorarios(voo, i)
                     conexao = self.getConexoes(voo, i)
 
-                    print(f"VOO: {preco} --> ({partida} --> {chegada} ) --> {conexao}")
-
                     self.listaVoosEncontrados['Empresa'].append(self.__class__.__name__[8:].upper())
                     self.listaVoosEncontrados['Partida'].append(partida)
                     self.listaVoosEncontrados['Chegada'].append(chegada)
@@ -125,8 +123,5 @@ class Buscador(ABC):
                     self.listaVoosEncontrados['Preço'].append(preco)
                     self.listaVoosEncontrados['Link'].append(self.link)
 
-            # 5.4 Salvar as informações em uma tabela
-
-            # 5.5 Ir para a próxima data de voos e recomeçar a partir do item 3
         
         return pd.DataFrame(self.listaVoosEncontrados)
