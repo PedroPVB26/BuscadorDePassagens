@@ -1,3 +1,5 @@
+![alt text](hand-holding-plane-sky.jpg)
+
 # Buscador de Passagens
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Selenium](https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white)
