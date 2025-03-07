@@ -1,10 +1,9 @@
 from selenium.webdriver.common.by import By
 from datetime import datetime, timedelta
 from abc import ABC, abstractmethod
-import time
-# LATAM: YYYY-MM-DD
-# GOL: DD-MM-YYY
-# AZUL: DD/MM/YYYY
+import pandas as pd
+
+
 class Buscador(ABC):
     def __init__(self, outbound, origin, destination, intervalo_tempo, preco_maximo, navegador):
         self.outbound = outbound
@@ -15,6 +14,14 @@ class Buscador(ABC):
         self.navegador = navegador
         self.proxDataDeBusca = datetime.strptime(self.outbound, "%d-%m-%Y")
         self.dataAtual = self.proxDataDeBusca
+        self.listaVoosEncontrados = {
+            'Empresa' : [],
+            'Partida': [],
+            'Chegada': [],
+            'Conexões': [],
+            'Preço': [],
+            'Link': [],
+        }
     
     
     # # Serve para pegar o preço já formatado
@@ -111,8 +118,15 @@ class Buscador(ABC):
 
                     print(f"VOO: {preco} --> ({partida} --> {chegada} ) --> {conexao}")
 
+                    self.listaVoosEncontrados['Empresa'].append(self.__class__.__name__[8:].upper())
+                    self.listaVoosEncontrados['Partida'].append(partida)
+                    self.listaVoosEncontrados['Chegada'].append(chegada)
+                    self.listaVoosEncontrados['Conexões'].append(conexao)
+                    self.listaVoosEncontrados['Preço'].append(preco)
+                    self.listaVoosEncontrados['Link'].append(self.link)
 
             # 5.4 Salvar as informações em uma tabela
 
             # 5.5 Ir para a próxima data de voos e recomeçar a partir do item 3
         
+        return pd.DataFrame(self.listaVoosEncontrados)

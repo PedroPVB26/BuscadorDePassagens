@@ -47,8 +47,8 @@ class BuscadorGol(Buscador):
 
         dataChegada = self.atualizarChegada(horarioPartida, horarioChegada, dataChegada)
 
-        partida = f"{dataPartida} : {horarioPartida}"
-        chegada = f"{dataChegada} : {horarioChegada}"
+        partida = f"{dataPartida} - {horarioPartida}"
+        chegada = f"{dataChegada} - {horarioChegada}"
 
         return partida, chegada
     

@@ -65,8 +65,8 @@ class BuscadorLatam(Buscador):
             
         dataChegada = dataChegada.strftime("%d/%m/%Y")
 
-        partida = f"{dataPartida} : {horarioPartida}"
-        chegada = f"{dataChegada} : {horarioChegada}"
+        partida = f"{dataPartida} - {horarioPartida}"
+        chegada = f"{dataChegada} - {horarioChegada}"
 
         return partida, chegada
     

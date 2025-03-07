@@ -95,8 +95,8 @@ class BuscadorAzul(Buscador):
 
         horarioChegada, dataChegada = self.atualizarChegada(dataPartida, horarioChegada)
         
-        partida = f"{dataPartida} : {horarioPartida}"
-        chegada = f"{dataChegada} : {horarioChegada}"
+        partida = f"{dataPartida} - {horarioPartida}"
+        chegada = f"{dataChegada} - {horarioChegada}"
 
         return partida, chegada
     
