@@ -22,10 +22,11 @@ Um sistema que busca passagens para um período, pega as que estiverem na faixa 
     - **ChromeDriver**
         - Verifique a versão do seu Google Chrome e baixe a versão do Chromedrive correspondente a ela;
         - Para verificar a versão do seu Chrome, vá em chrome://settings/help.
-        - [Instalar ChromeDrive](https://developer.chrome.com/docs/chromedriver/downloads?hl=pt-br)
+        - [Instalar ChromeDrivee](https://developer.chrome.com/docs/chromedriver/downloads?hl=pt-br)
 
-    - [**Google Chrome**](https://support.google.com/chrome/answer/95346?hl=pt-BR&co=GENIE.Platform%3DDesktop#zippy=%2Cwindows)
+    - **Google Chrome**
         - Por hora, o sistema foi feito para roda apenas no Chrome
+        - [Instalar Google Chrome]((https://support.google.com/chrome/answer/95346?hl=pt-BR&co=GENIE.Platform%3DDesktop#zippy=%2Cwindows))
 
 ## Como funciona
 ### 1 - Informações necessárias:
