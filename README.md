@@ -1,4 +1,7 @@
 # Buscador de Passagens
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Selenium](https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)
 
 ## O que é?
 Um sistema que busca passagens para um período, pega as que estiverem na faixa de preço informado e envia as informações dos voos encontrados para o email informado.
@@ -52,7 +55,7 @@ Um sistema que busca passagens para um período, pega as que estiverem na faixa 
 Após a criação da tabela, a mesma é enviada para o e-mail que o usuário informou no início
 
 
-## Exceução
+## Execução
 ### 1 - Clonagem
 
 ### 2 - Entrar no repositório 
