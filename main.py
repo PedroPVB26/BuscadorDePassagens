@@ -12,17 +12,17 @@ navegador = webdriver.Chrome()
 navegador.implicitly_wait(10)
 
 # ---------- LATAM ----------
-buscadorLatam = BuscadorLatam("17-04-2025", "BEL", "LDB", 1, 1500, navegador)
+buscadorLatam = BuscadorLatam("17-04-2025", "BEL", "LDB", 2, 1500, navegador)
 tabLatam = buscadorLatam.iniciarBusca()
 
 
 # ---------- GOL ----------
-buscadorGol = BuscadorGol("21-03-2025", "BEL", "STM", 1, 1500, navegador)
+buscadorGol = BuscadorGol("21-03-2025", "BEL", "STM", 2, 1500, navegador)
 tabGol = buscadorGol.iniciarBusca()
 
 
 # ---------- AZUL ----------
-buscadorAzul = BuscadorAzul("14-03-2025", "LDB", "VCP", 1, 3000, navegador)
+buscadorAzul = BuscadorAzul("14-03-2025", "LDB", "VCP", 2, 3000, navegador)
 tabAzul = buscadorAzul.iniciarBusca()
 
 
