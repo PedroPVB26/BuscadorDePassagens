@@ -2,43 +2,47 @@
 
 # Tratar para quando não há voos na data
 
-from selenium import webdriver
+from Aeroportos import CadastroAeroporto
 from BuscadorLatam import BuscadorLatam
-from BuscadorGol import BuscadorGol
 from BuscadorAzul import BuscadorAzul
+from BuscadorGol import BuscadorGol
+from selenium import webdriver
 import pandas as pd
 
-navegador = webdriver.Chrome()
-navegador.implicitly_wait(10)
+ca = CadastroAeroporto("Aeroportos.json")
+ca.verificarExistênciaArquivo()
 
-# ---------- LATAM ----------
-buscadorLatam = BuscadorLatam("17-04-2025", "BEL", "LDB", 2, 1500, navegador)
-tabLatam = buscadorLatam.iniciarBusca()
+# navegador = webdriver.Chrome()
+# navegador.implicitly_wait(10)
 
-
-# ---------- GOL ----------
-buscadorGol = BuscadorGol("21-03-2025", "BEL", "STM", 2, 1500, navegador)
-tabGol = buscadorGol.iniciarBusca()
+# # ---------- LATAM ----------
+# buscadorLatam = BuscadorLatam("17-04-2025", "BEL", "LDB", 2, 1500, navegador)
+# tabLatam = buscadorLatam.iniciarBusca()
 
 
-# ---------- AZUL ----------
-buscadorAzul = BuscadorAzul("14-03-2025", "LDB", "VCP", 2, 3000, navegador)
-tabAzul = buscadorAzul.iniciarBusca()
+# # ---------- GOL ----------
+# buscadorGol = BuscadorGol("21-03-2025", "BEL", "STM", 2, 1500, navegador)
+# tabGol = buscadorGol.iniciarBusca()
 
 
-# Formatando a Tabela
-tabelaVoos = pd.concat([tabLatam, tabGol, tabAzul])
-tabelaVoos = tabelaVoos.sort_values('Preço')
+# # ---------- AZUL ----------
+# buscadorAzul = BuscadorAzul("14-03-2025", "LDB", "VCP", 2, 3000, navegador)
+# tabAzul = buscadorAzul.iniciarBusca()
 
-print(tabelaVoos.columns)
 
-# Formatando a data
-tabelaVoos['Partida']  = pd.to_datetime(tabelaVoos['Partida'], format = "%d/%m/%Y - %H:%M")
-tabelaVoos['Chegada'] = pd.to_datetime(tabelaVoos['Chegada'], format = "%d/%m/%Y - %H:%M")
+# # Formatando a Tabela
+# tabelaVoos = pd.concat([tabLatam, tabGol, tabAzul])
+# tabelaVoos = tabelaVoos.sort_values('Preço')
 
-tabelaVoos['Partida'] = tabelaVoos['Partida'].dt.strftime("%H:%M - %d/%m")
-tabelaVoos['Chegada'] = tabelaVoos['Chegada'].dt.strftime("%H:%M - %d/%m")
+# print(tabelaVoos.columns)
 
-# Salvando a tabela
-tabelaVoos.to_excel('Voos.xlsx', index=False)
+# # Formatando a data
+# tabelaVoos['Partida']  = pd.to_datetime(tabelaVoos['Partida'], format = "%d/%m/%Y - %H:%M")
+# tabelaVoos['Chegada'] = pd.to_datetime(tabelaVoos['Chegada'], format = "%d/%m/%Y - %H:%M")
+
+# tabelaVoos['Partida'] = tabelaVoos['Partida'].dt.strftime("%H:%M - %d/%m")
+# tabelaVoos['Chegada'] = tabelaVoos['Chegada'].dt.strftime("%H:%M - %d/%m")
+
+# # Salvando a tabela
+# tabelaVoos.to_excel('Voos.xlsx', index=False)
 
