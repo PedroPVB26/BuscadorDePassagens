@@ -6,43 +6,65 @@ from Aeroportos import CadastroAeroporto
 from BuscadorLatam import BuscadorLatam
 from BuscadorAzul import BuscadorAzul
 from BuscadorGol import BuscadorGol
+from Janela import Janela
 from selenium import webdriver
 import pandas as pd
+import os
 
+# Lista dos aeroportos
 ca = CadastroAeroporto("Aeroportos.json")
 ca.verificarExistênciaArquivo()
-
-# navegador = webdriver.Chrome()
-# navegador.implicitly_wait(10)
-
-# # ---------- LATAM ----------
-# buscadorLatam = BuscadorLatam("17-04-2025", "BEL", "LDB", 2, 1500, navegador)
-# tabLatam = buscadorLatam.iniciarBusca()
+listaAeroportos = ca.getListaAeroportos()
 
 
-# # ---------- GOL ----------
-# buscadorGol = BuscadorGol("21-03-2025", "BEL", "STM", 2, 1500, navegador)
-# tabGol = buscadorGol.iniciarBusca()
+# Interface Gráfica - Janela
+janela = Janela(listaAeroportos)
+janela.mainloop()
 
 
-# # ---------- AZUL ----------
-# buscadorAzul = BuscadorAzul("14-03-2025", "LDB", "VCP", 2, 3000, navegador)
-# tabAzul = buscadorAzul.iniciarBusca()
+# Pegando as variáveis de ambiente criadas pela janela
+outbound = os.getenv('OUTBOUND')
+inbound = os.getenv('INBOUND')
+origin = os.getenv('ORIGIN')
+destination = os.getenv('DESTINATION')
+precoMaximo = float(os.getenv('PRECO_MAXIMO'))
+email = os.getenv('EMAIL')
+diferenca = int(os.getenv('DIFERENCA'))
 
 
-# # Formatando a Tabela
-# tabelaVoos = pd.concat([tabLatam, tabGol, tabAzul])
-# tabelaVoos = tabelaVoos.sort_values('Preço')
+# Inicializando o navegador
+navegador = webdriver.Chrome()
+navegador.implicitly_wait(10)
 
-# print(tabelaVoos.columns)
 
-# # Formatando a data
-# tabelaVoos['Partida']  = pd.to_datetime(tabelaVoos['Partida'], format = "%d/%m/%Y - %H:%M")
-# tabelaVoos['Chegada'] = pd.to_datetime(tabelaVoos['Chegada'], format = "%d/%m/%Y - %H:%M")
+# ---------- LATAM ----------
+buscadorLatam = BuscadorLatam(outbound, origin, destination, diferenca, precoMaximo ,navegador)
+tabLatam = buscadorLatam.iniciarBusca()
 
-# tabelaVoos['Partida'] = tabelaVoos['Partida'].dt.strftime("%H:%M - %d/%m")
-# tabelaVoos['Chegada'] = tabelaVoos['Chegada'].dt.strftime("%H:%M - %d/%m")
 
-# # Salvando a tabela
-# tabelaVoos.to_excel('Voos.xlsx', index=False)
+# ---------- GOL ----------
+buscadorGol = BuscadorGol(outbound, origin, destination, diferenca, precoMaximo ,navegador)
+tabGol = buscadorGol.iniciarBusca()
+
+
+# ---------- AZUL ----------
+buscadorAzul = BuscadorAzul(outbound, origin, destination, diferenca, precoMaximo ,navegador)
+tabAzul = buscadorAzul.iniciarBusca()
+
+
+# Formatando a Tabela
+tabelaVoos = pd.concat([tabLatam, tabGol, tabAzul])
+tabelaVoos = tabelaVoos.sort_values('Preço')
+
+print(tabelaVoos.columns)
+
+# Formatando a data
+tabelaVoos['Partida']  = pd.to_datetime(tabelaVoos['Partida'], format = "%d/%m/%Y - %H:%M")
+tabelaVoos['Chegada'] = pd.to_datetime(tabelaVoos['Chegada'], format = "%d/%m/%Y - %H:%M")
+
+tabelaVoos['Partida'] = tabelaVoos['Partida'].dt.strftime("%H:%M - %d/%m")
+tabelaVoos['Chegada'] = tabelaVoos['Chegada'].dt.strftime("%H:%M - %d/%m")
+
+# Salvando a tabela
+tabelaVoos.to_excel('Voos.xlsx', index=False)
 

@@ -19,18 +19,24 @@ class Janela(tk.Tk):
         inbound = self.calendario_final.get()
         origin = self.selecionar_origem.get()[-3:]
         destination = self.selecionar_destino.get()[-3:]
-        preco_maximo = float(self.entry_preco_maximo.get())
+        precoMaximo = self.entry_preco_maximo.get()
         email = self.entry_email.get()
         with open("email.txt", "w") as f:
             f.write("pedrovbittencourt@gmail.com")
         self.quit()
 
         # Calculando a diferenca em dias entre o ultimo e primeiro dia do periodo da viagem
-        diferenca = ((datetime.strptime(inbound, "%d-%m-%Y")) - datetime.strptime(outbound, "%d-%m-%Y")).days
-        self.funcao(outbound, inbound, origin, destination, diferenca, preco_maximo, email, self.navegador)
+        diferenca = str(((datetime.strptime(inbound, "%d-%m-%Y")) - datetime.strptime(outbound, "%d-%m-%Y")).days)
+        
+        os.environ['OUTBOUND'] = outbound
+        os.environ['INBOUND'] = inbound
+        os.environ['ORIGIN'] = origin
+        os.environ['DESTINATION'] = destination
+        os.environ['PRECO_MAXIMO'] = precoMaximo
+        os.environ['EMAIL'] = email
+        os.environ['DIFERENCA'] = diferenca
 
-        self.navegador.quit()
-        tkinter.messagebox.showinfo(title="Passagens", message=f"Um email foi enviado para você com o resultado da busca")
+        # tkinter.messagebox.showinfo(title="Passagens", message=f"Um email foi enviado para você com o resultado da busca")
 
     def _verificando_campos(self, *args):
         self.validacao = 6
@@ -158,13 +164,13 @@ class Janela(tk.Tk):
             self.label_preco["fg"] = "red"
             return False
 
+
     # --------------------
-    def __init__(self, navegador, funcao):
+    def __init__(self, listaAeroportos):
         super().__init__()
-        self.navegador = navegador
         self.title("Buscador De Voos")
         self.validacao = 6
-        self.aeroportos = []
+        self.aeroportos = listaAeroportos
 
 
         # ---------- TÍTULO DA JANELA ----------
@@ -191,9 +197,7 @@ class Janela(tk.Tk):
         self.calendario_final.bind("<Motion>", self._verificando_campos)
 
         # ---------- ORIGEM ----------
-        with open("Aeroportos.json", "r") as f:
-            self.aeroportos = json.load(f)
-            aeroportos = [f"{aeroporto[0]} / {aeroporto[1]} - {aeroporto[2]}" for aeroporto in self.aeroportos]
+        aeroportos = [f"{aeroporto[0]} / {aeroporto[1]} - {aeroporto[2]}" for aeroporto in self.aeroportos]
 
         self.label_origem = tk.Label(text="Cidade de origem")
         self.label_origem.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky='NSEW')
