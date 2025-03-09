@@ -1,4 +1,4 @@
-![alt text](hand-holding-plane-sky.jpg)
+![Mão segurnado um avião](img/hand-holding-plane-sky.jpg)
 
 # Buscador de Passagens
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
@@ -60,12 +60,52 @@ Após a criação da tabela, a mesma é enviada para o e-mail que o usuário inf
 
 ## Execução
 ### 1 - Clonagem
+- Abra um terminal no diretório onde desejar armazenar o projeto e excute:
+```bash
+git clone https://github.com/PedroPVB26/BuscadorDePassagens.git
+```
 
 ### 2 - Entrar no repositório 
+- Ainda no mesmo terminal por onde foi feita a clonagem:
+```bash
+cd BuscadorDePassagens
+```
+
 ### 3 - Executar o arquivo main
+- Lembrando, para que o sistema funcione, você deve ter o **python** instalado na sua máquina;
+- Para executar o sitema, execute, ainda no mesmo terminal, o seguinte comando:
+```bash
+python main.py
+```
+
 ### 4 - Inserir os dados
+**1 - Data de Início e Final**  
+![Campos de Data](img/image-1.png)
+- As datas de início e fim definem o período o voo deve ser procurado.
+- **Observação**: A data de início deve ser igual ou posterior a data do dia atual e data final deve ser igual ou posterior a data de início.
+- Você pode inserir a data de forma manual (utilizando a mesma formatação) ou escolher por meio do calendário, que pode ser acessado pressionando na extremidade direita do campo (indicada pela área contornada de amarelo na imagem).
+
+**2 - Origem e Destino**  
+![Campos de Origem e Destino](img/image-2.png)
+- Origem define a cidade de onde o voo irá partir, e o destino o destino final do voo.
+- **Observação**: não insira as cidades de forma manual, selecione por meio da lista das cidades disponíveis, pressionando a extremidade direita do campo (indicada pela área contornada de amarelo na imagem).
+
+**3 - Preço Máximo**  
+![Campo Preço Máximo](img/image-3.png)
+- O preço máximo desejado para o voo.
+- **Observação**: Insira apenas números inteiros.
+
+**4 - Buscar Voos**
+- Após o preenchimentos das informações, o sistema faz uma pequena validação e, caso ela passe, o botão para buscar os voos será habilitado, caso contrário permancerá desabilitado até que todos os campos passem pela validação.
+
 ### 5 - Esperar finalização das buscas
+- Após pressionar o botão para buscar os voos correspondentes, o sistema abrirá o navegaodr (Google Chrome) e iniciará as busca nas companhias aéreas Latam, Gol e Azul.
+- **Observação**: enquanto o sistema estiver com o navegador aberto, não faça nenhuma ação nele, de preferência, mantenha o navegador **minimizado**.
+
 ### 6 - Verificar o e-mail
+- Após a finalização da busca, o navegador fechará sozinho e será exibida uma janela informando que o resultado da busca foi enviado para o e-mail informado.
+- Verifique o seu e-mail e obtenha a tabela enviada.
+- **Observação**: pelo fato de o preço das passagens aéreas mudarem com certa frequência, nem sempre o valor de um voo informado na tabela será o mesmo quando o link para a compra do mesmo for acessado.
 
 ## Tecnologias
 - Python

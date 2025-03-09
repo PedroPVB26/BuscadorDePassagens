@@ -56,8 +56,6 @@ tabAzul = buscadorAzul.iniciarBusca()
 tabelaVoos = pd.concat([tabLatam, tabGol, tabAzul])
 tabelaVoos = tabelaVoos.sort_values('Preço')
 
-print(tabelaVoos.columns)
-
 # Formatando a data
 tabelaVoos['Partida']  = pd.to_datetime(tabelaVoos['Partida'], format = "%d/%m/%Y - %H:%M")
 tabelaVoos['Chegada'] = pd.to_datetime(tabelaVoos['Chegada'], format = "%d/%m/%Y - %H:%M")

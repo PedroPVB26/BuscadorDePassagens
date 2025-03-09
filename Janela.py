@@ -36,7 +36,7 @@ class Janela(tk.Tk):
         os.environ['EMAIL'] = email
         os.environ['DIFERENCA'] = diferenca
 
-        # tkinter.messagebox.showinfo(title="Passagens", message=f"Um email foi enviado para você com o resultado da busca")
+        tkinter.messagebox.showinfo(title="Passagens", message=f"Um email foi enviado para você com o resultado da busca")
 
     def _verificando_campos(self, *args):
         self.validacao = 6
