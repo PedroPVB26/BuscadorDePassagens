@@ -28,6 +28,7 @@ Um sistema que busca passagens para um período, pega as que estiverem na faixa 
         - Por hora, o sistema foi feito para roda apenas no Chrome
         - [Instalar Google Chrome]((https://support.google.com/chrome/answer/95346?hl=pt-BR&co=GENIE.Platform%3DDesktop#zippy=%2Cwindows))
 
+
 ## Como funciona
 ### 1 - Informações necessárias:
 - **Data de Início e Final**: O sistema permite buscar passagens para múltiplos dias. Para isso, o usuário deve informar a data de início, que marca o primeiro dia do período desejado, e a data final, que define o último dia. Com essas informações, o sistema pesquisa todas as passagens disponíveis dentro desse intervalo.
@@ -55,8 +56,7 @@ Um sistema que busca passagens para um período, pega as que estiverem na faixa 
     - **Link**: é o link para acesssar o voo.
 
 ### 4 - Envio da Tabela:
-Após a criação da tabela, a mesma é enviada para o e-mail que o usuário informou no início
-
+Após a criação da tabela, a mesma é enviada para o e-mail que o usuário informou no início.
 
 ## Execução
 ### 1 - Clonagem
@@ -81,7 +81,7 @@ python main.py
 ### 4 - Inserir os dados
 **1 - Data de Início e Final**  
 ![Campos de Data](img/image-1.png)
-- As datas de início e fim definem o período o voo deve ser procurado.
+- As datas de início e fim definem o período do voo que deve ser procurado.
 - **Observação**: A data de início deve ser igual ou posterior a data do dia atual e data final deve ser igual ou posterior a data de início.
 - Você pode inserir a data de forma manual (utilizando a mesma formatação) ou escolher por meio do calendário, que pode ser acessado pressionando na extremidade direita do campo (indicada pela área contornada de amarelo na imagem).
 
@@ -107,6 +107,3 @@ python main.py
 - Verifique o seu e-mail e obtenha a tabela enviada.
 - **Observação**: pelo fato de o preço das passagens aéreas mudarem com certa frequência, nem sempre o valor de um voo informado na tabela será o mesmo quando o link para a compra do mesmo for acessado.
 
-## Tecnologias
-- Python
-- Selenium

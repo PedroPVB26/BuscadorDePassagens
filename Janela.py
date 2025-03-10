@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 from tkcalendar import DateEntry
 from datetime import datetime
-import tkinter.messagebox
 import json
 from unidecode import unidecode
 from functools import partial
@@ -21,9 +20,6 @@ class Janela(tk.Tk):
         destination = self.selecionar_destino.get()[-3:]
         precoMaximo = self.entry_preco_maximo.get()
         email = self.entry_email.get()
-        with open("email.txt", "w") as f:
-            f.write("pedrovbittencourt@gmail.com")
-        self.quit()
 
         # Calculando a diferenca em dias entre o ultimo e primeiro dia do periodo da viagem
         diferenca = str(((datetime.strptime(inbound, "%d-%m-%Y")) - datetime.strptime(outbound, "%d-%m-%Y")).days)
@@ -36,8 +32,9 @@ class Janela(tk.Tk):
         os.environ['EMAIL'] = email
         os.environ['DIFERENCA'] = diferenca
 
-        tkinter.messagebox.showinfo(title="Passagens", message=f"Um email foi enviado para você com o resultado da busca")
+        self.destroy()
 
+        
     def _verificando_campos(self, *args):
         self.validacao = 6
         # Verificando se todos os campos foram preenchidos

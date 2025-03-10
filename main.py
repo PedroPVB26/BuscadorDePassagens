@@ -7,9 +7,11 @@ from BuscadorLatam import BuscadorLatam
 from BuscadorAzul import BuscadorAzul
 from BuscadorGol import BuscadorGol
 from Janela import Janela
+import requests
 from selenium import webdriver
 import pandas as pd
 import os
+import tkinter.messagebox
 
 # Lista dos aeroportos
 ca = CadastroAeroporto("Aeroportos.json")
@@ -29,7 +31,7 @@ origin = os.getenv('ORIGIN')
 destination = os.getenv('DESTINATION')
 precoMaximo = float(os.getenv('PRECO_MAXIMO'))
 email = os.getenv('EMAIL')
-diferenca = int(os.getenv('DIFERENCA'))
+diferenca = int(os.getenv('DIFERENCA')) + 1
 
 
 # Inicializando o navegador
@@ -66,3 +68,6 @@ tabelaVoos['Chegada'] = tabelaVoos['Chegada'].dt.strftime("%H:%M - %d/%m")
 # Salvando a tabela
 tabelaVoos.to_excel('Voos.xlsx', index=False)
 
+# Enviando e-mail
+files = {"file": open("Voos.xlsx", "rb")}
+response = requests.post(f"https://57fdc9aa-1b77-4948-8581-e213f37fde42-00-113bqt8b077sc.spock.replit.dev:5000/sendEmail/{email}", files=files)
